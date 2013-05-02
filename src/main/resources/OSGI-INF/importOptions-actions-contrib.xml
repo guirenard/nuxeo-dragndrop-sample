@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<component name="org.nuxeo.sample.dnd.actions.contrib">
+
+  <require>org.nuxeo.ecm.platform.actions</require>
+
+  <extension target="org.nuxeo.ecm.platform.actions.ActionService"
+    point="actions">
+
+    <action id="Chain.FileManager.ImportWithMetaDataAndTagsInSeam"
+      link="${org.nuxeo.ecm.contextPath}/dndFormCollector.faces?schema=dc&#038;layout=dndTagsEdit"
+      order="30" label="label.smart.import.with.mdTags"
+      help="desc.smart.import.with.md.mdTags">
+      <category>ContentView</category>
+      <filter-id>create</filter-id>
+    </action>
+
+  </extension>
+
+</component>

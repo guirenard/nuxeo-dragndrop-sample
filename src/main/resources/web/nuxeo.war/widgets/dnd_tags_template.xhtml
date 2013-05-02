@@ -1,0 +1,77 @@
+<div xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:a4j="http://richfaces.org/a4j"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:nxu="http://nuxeo.org/nxweb/util"
+  xmlns:c="http://java.sun.com/jstl/core"
+  xmlns:rich="http://richfaces.org/rich">
+
+  <c:if test="#{tagServiceEnabled}">
+
+    <a4j:region id="#{widget.id}_taggingRegion">
+      <a4j:outputPanel id="#{widget.id}_taggingPanel"
+        ajaxRendered="false">
+
+        <nxu:dataList id="#{widget.id}_tagsTable" var="tag"
+          value="#{dndTags}"
+          rendered="#{not empty dndTags}">
+          <span>
+            <h:outputText value="#{tag}" />
+            <a4j:commandLink id="#{widget.id}_removeTag"
+              action="#{dndTagsFormActions.removeDndTag(tag)}"
+              immediate="true"
+              reRender="#{widget.id}_message_banner, #{widget.id}_taggingPanel, MultiTreeView">
+              <h:graphicImage value="/icons/action_delete_mini.png" />
+            </a4j:commandLink>
+          </span>
+        </nxu:dataList>
+
+          <div>
+            <span id="#{widget.id}_tag_suggestDiv">
+              <h:inputText
+                id="#{widget.id}_tagLabel"
+                value="#{dndTagsFormActions.tagLabel}"
+                styleClass="dataInputText"
+                onkeydown="if (event.keyCode == 13 || event.keyCode == 9) {return false;}">
+              </h:inputText>
+            </span>
+
+            <a4j:commandButton
+              value="#{messages['command.tag.add.new.tag']}"
+              id="#{widget.id}_tagLabelAddButton"
+              action="#{dndTagsFormActions.addDndTag}" styleClass="button"
+              reRender="#{widget.id}_message_banner, #{widget.id}_taggingPanel, MultiTreeView" />
+
+            <a4j:status>
+              <f:facet name="start">
+                <h:graphicImage value="/img/standart_waiter.gif" />
+              </f:facet>
+            </a4j:status>
+          </div>
+
+          <h:panelGroup id="#{widget.id}_tag_suggestGroup">
+            <rich:suggestionbox id="#{widget.id}_tag_suggestBox"
+              for="#{widget.id}_tagLabel" tokens=""
+              suggestionAction="#{tagActions.getSuggestions}"
+              var="sugtag" fetchValue="#{sugtag.label}"
+              nothingLabel="#{messages['label.suggestion.noSearchResults']}"
+              minChars="3" frequency="0" requestDelay="100">
+              <a4j:support event="onselect" bypassUpdates="true">
+              </a4j:support>
+              <h:column>
+                <f:subview>
+                  <span>
+                    <h:outputText value="${sugtag.label}" />
+                  </span>
+                </f:subview>
+              </h:column>
+            </rich:suggestionbox>
+          </h:panelGroup>
+
+
+      </a4j:outputPanel>
+    </a4j:region>
+
+  </c:if>
+
+</div>

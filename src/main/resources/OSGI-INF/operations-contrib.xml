@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<component name="org.nuxeo.sample.dnd.automation.contrib" version="1.0">
+
+  <extension point="chains"
+    target="org.nuxeo.ecm.core.operation.OperationServiceComponent">
+    <chain id="FileManager.ImportWithMetaDataAndTagsInSeam">
+      <operation id="Seam.RunOperation">
+        <param type="string" name="id">Chain.FileManager.ImportWithMetaDataAndTags</param>
+      </operation>
+    </chain>
+    <chain id="FileManager.ImportWithMetaDataAndTags">
+      <operation id="FileManager.Import">
+         <param type="boolean" name="overwite">true</param>
+      </operation>
+      <operation id="Document.Update">
+        <param type="properties" name="properties">expr:Context.get("docMetaData")</param>
+      </operation>
+      <operation id="Document.TagDocument"/>
+      <operation id="Seam.Refresh"/>
+    </chain>
+
+  </extension>
+
+</component>

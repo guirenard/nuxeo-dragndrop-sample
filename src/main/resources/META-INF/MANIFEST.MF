@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-Vendor: Nuxeo
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .
+Bundle-Version: 5.7-I20130419_0116
+Bundle-Name: nuxeo-dragndrop-sample
+Nuxeo-Component: OSGI-INF/extensions/org.nuxeo.sample.dnd.TagDocument.
+ xml,OSGI-INF/importOptions-actions-contrib.xml,OSGI-INF/layouts-contrib.xml,OSGI-INF/operations-contrib.xml
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: nuxeo-dragndrop-sample
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+
